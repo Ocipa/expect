@@ -36,12 +36,13 @@ expect(object).hasnt.key("a") -- errors of object does have key "a"
 - [ ] equal -- might be changed to be a sub of `is` and `isnt`
 - [ ] unequal -- might be changed to be a sub of `is` and `isnt`
 - has
-    - [ ] has.property
-    - [ ] has.attribute
-    - [ ] has.key
-    - [ ] has.value
+    - [x] has.property
+    - [x] has.attribute
+    - [x] has.key
+    - [x] has.value
 - hasnt
-    - [ ] hasnt.property
-    - [ ] hasnt.attribute
-    - [ ] hasnt.key
-    - [ ] hasnt.value
+    - [x] hasnt.property
+    - [x] hasnt.attribute
+    - [x] hasnt.key
+    - [x] hasnt.value
+-[ ] tests

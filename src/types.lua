@@ -9,8 +9,8 @@ export type expect = {
     equal: nil,
     unequal: nil,
 
-    has: nil,
-    hasnt: nil,
+    has: has,
+    hasnt: has,
 }
 
 export type is = {
@@ -27,6 +27,20 @@ export type is = {
 
     instance: () -> boolean,
     class: (classname: string) -> boolean,
+}
+
+export type has = {
+    property: (propertyName: string) -> boolean,
+    properties: (propertyNames: {string}) -> boolean,
+
+    attribute: (attributeName: string) -> boolean,
+    attributes: (attributesNames: {string}) -> boolean,
+
+    key: (key: any) -> boolean,
+    keys: (keys: {any}) -> boolean,
+
+    value: (value: any) -> boolean,
+    values: (values: {any}) -> boolean,
 }
 
 

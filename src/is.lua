@@ -1,7 +1,9 @@
 
 local runService = game:GetService("RunService")
 
-local checks
+local types = require(script.Parent.types)
+
+local checks: types.is
 checks = {
     server = function(_, _)
         if not runService:IsServer() then
