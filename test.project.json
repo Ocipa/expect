@@ -16,7 +16,17 @@
 
       "expect": {
         "$path": "src"
+      },
+
+      "devPackages": {
+        "$path": "DevPackages"
       }
+    },
+
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+
+      "$path": "test"
     }
   }
 }
