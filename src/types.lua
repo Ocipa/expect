@@ -4,13 +4,10 @@
 
 export type expect = {
     is: is,
-    isnt: is,
-
-    equal: nil,
-    unequal: nil,
+    isNot: is,
 
     has: has,
-    hasnt: has,
+    hasNot: has,
 }
 
 export type is = {
@@ -27,6 +24,8 @@ export type is = {
 
     instance: () -> boolean,
     class: (classname: string) -> boolean,
+
+    equal: (value: any) -> boolean,
 }
 
 export type has = {

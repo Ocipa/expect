@@ -119,6 +119,18 @@ checks = {
 
         return true
     end,
+
+
+
+
+
+    equal = function(v1, v2)
+        if v1 == v2 then
+            error(string.format("[ERROR]: expected %s to not equal %s", tostring(v1), tostring(v2)), 3)
+        end
+
+        return true
+    end
 }
 
 return checks
