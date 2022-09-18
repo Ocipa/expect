@@ -1,7 +1,7 @@
 
 local types = require(script.Parent.types)
 local is = require(script.Parent.is)
-local isnt = require(script.Parent.isnt)
+local isNot = require(script.Parent.isNot)
 
 
 local checks: types.has
@@ -62,7 +62,7 @@ checks = {
 
     key = function(tbl, key)
         is.table(tbl)
-        isnt.none(key)
+        isNot.none(key)
 
         if tbl[key] == nil then
             error(string.format("[ERROR]: expected table to kave '%s' key", key), 3)
@@ -84,7 +84,7 @@ checks = {
 
     value = function(tbl, value)
         is.table(tbl)
-        isnt.none(value)
+        isNot.none(value)
 
         for _, v in tbl do
             if v == value then
