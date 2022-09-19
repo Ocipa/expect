@@ -17,7 +17,10 @@ for i, v in modifierKeys do
 
     for i2, v2 in v do
         assertKeys[i2] = function(value2)
-            v2(if value1 ~= nil then value1 else value2, value2)
+            local val1 = value1
+            value1 = nil
+
+            v2(val1, value2)
         end
     end
 
