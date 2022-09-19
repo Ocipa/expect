@@ -5,6 +5,8 @@
     <img src="./assets/logo.png">
 </p>
 
+> This is an opinionated assert library.
+
 
 ## Example
 ```lua
@@ -24,10 +26,3 @@ local object = {
 expect(object).has.key("a") -- errors of object does not have key "a"
 expect(object).hasNot.key("a") -- errors of object does have key "a"
 ```
-
-## Progress
-- [x] is
-- [x] isnt
-- [x] has
-- [x] hasnt
-- [ ] tests

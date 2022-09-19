@@ -1,36 +1,32 @@
 
 local types = require(script.types)
 
-local module = {}
 
-function module:__call(value: any): types.expect
-    local v1 = module._value
-    local v2 = value
+local value1: any = nil
 
-    local modifierKey = module._modifierKey
-    local lastKey = module._lastKey
+local modifierKeys = {
+    is = require(script.is),
+    isNot = require(script.isNot),
 
-    if module._modifierKey and module._lastKey then
-        module._modifierKey = nil
-        module._lastKey = nil
-        module._value = nil
+    has = require(script.has),
+    hasNot = require(script.hasNot)
+}
 
-        return require(script:FindFirstChild(modifierKey))[lastKey](v1, v2)
+for i, v in modifierKeys do
+    local assertKeys = {}
 
-    else
-        module._value = value
+    for i2, v2 in v do
+        assertKeys[i2] = function(value2)
+            v2(if value1 ~= nil then value1 else value2, value2)
+        end
     end
 
-    return self
+    modifierKeys[i] = assertKeys
 end
 
-function module:__index(key)
-    module._modifierKey = module._lastKey
-    module._lastKey = key
 
-    return self
+return function(value: any): types.expect
+    value1 = value
+
+    return modifierKeys
 end
-
-return setmetatable({} :: types.expect, module)
-
-
