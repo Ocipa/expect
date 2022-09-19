@@ -1,7 +1,7 @@
 
 local replicatedStorage = game:GetService("ReplicatedStorage")
 
-local testEz = require(replicatedStorage.devPackages.testez)
+local testEz = require(replicatedStorage.modules.TestEZ)
 
 
 -- create test values
