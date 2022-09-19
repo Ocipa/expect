@@ -26,3 +26,7 @@ local object = {
 expect(object).has.key("a") -- errors of object does not have key "a"
 expect(object).hasNot.key("a") -- errors of object does have key "a"
 ```
+
+## License
+
+Distributed under the MIT License. See [LICENSE](./LICENSE) for more information.
