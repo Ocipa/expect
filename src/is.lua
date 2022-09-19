@@ -21,6 +21,14 @@ checks = {
         return true
     end,
 
+    studio = function(_, _)
+        if not runService:IsStudio() then
+            error("[ERROR]: expected to be in studio", 3)
+        end
+
+        return true
+    end,
+
 
 
 

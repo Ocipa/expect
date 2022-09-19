@@ -1,4 +1,5 @@
 
+local runService = game:GetService("RunService")
 
 local strings = _G.strings
 local numbers = _G.numbers
@@ -10,6 +11,35 @@ local threads = _G.threads
 
 return function()
     local module = require(script.Parent)
+
+    describe("environment type", function()
+        it("is not server", function()
+            if not runService:IsServer() then
+                expect(module().isNot.server).never.to.throw()
+
+            else
+                expect(module().isNot.server).to.throw()
+            end
+        end)
+
+        it("is not client", function()
+            if not runService:IsClient() then
+                expect(module().isNot.client).never.to.throw()
+
+            else
+                expect(module().isNot.client).to.throw()
+            end
+        end)
+
+        it("is not studio", function()
+            if not runService:IsStudio() then
+                expect(module().isNot.studio).never.to.throw()
+
+            else
+                expect(module().isNot.studio).to.throw()
+            end
+        end)
+    end)
 
     describe("none", function()
         it("valid none", function()
