@@ -7,88 +7,99 @@ local isNot = require(script.Parent.isNot)
 local checks: types.has
 checks = {
     property = function(instance, propertyName)
-        is.instance(instance)
-        is.string(propertyName)
+        local result = is.instance(instance)
+        if result ~= true then return result end
+
+        local result = is.string(propertyName)
+        if result ~= true then return result end
 
         local success, _ = pcall(function()
             return instance[propertyName]
         end)
 
         if success == true then
-            local class = instance.ClassName
-            local msg = "[ERROR]: expected %s, to not have '%s' property"
+            local msg = "expected %s, to not have '%s' property"
 
-            error(string.format(msg, class, propertyName), 3)
+            return string.format(msg, instance.ClassName, propertyName)
         end
 
         return true
     end,
 
     properties = function(instance, propertyNames)
-        is.instance(instance)
-        is.table(propertyNames)
+        local result = is.table(propertyNames)
+        if result ~= true then return result end
 
         for _, propertyName in propertyNames do
-            checks.property(instance, propertyName)
+            return checks.property(instance, propertyName)
         end
 
         return true
     end,
 
     attribute = function(instance, attributeName)
-        is.instance(instance)
-        is.string(attributeName)
+        local result = is.instance(instance)
+        if result ~= true then return result end
+
+        local result = is.string(attributeName)
+        if result ~= true then return result end
 
         if instance:GetAttribute(attributeName) ~= nil then
-            local class = instance.ClassName
-            local msg = "[ERROR]: expected %s, to not have '%s' attribute"
+            local msg = "expected %s, to not have '%s' attribute"
 
-            error(string.format(msg, class, attributeName), 3)
+            return string.format(msg, instance.ClassName, attributeName)
         end
 
         return true
     end,
 
     attributes = function(instance, attributeNames)
-        is.instance(instance)
-        is.table(attributeNames)
+        local result = is.table(attributeNames)
+        if result ~= true then return result end
 
         for _, attributeName in attributeNames do
-            checks.attribute(instance, attributeName)
+            return checks.attribute(instance, attributeName)
         end
 
         return true
     end,
 
     key = function(tbl, key)
-        is.table(tbl)
-        isNot.none(key)
+        local result = is.table(tbl)
+        if result ~= true then return result end
+
+        local result = isNot.none(key)
+        if result ~= true then return result end
 
         if tbl[key] ~= nil then
-            error(string.format("[ERROR]: expected table to not kave '%s' key", key), 3)
+            return string.format("expected table to not kave '%s' key", key)
         end
 
         return true
     end,
 
     keys = function(tbl, keys)
-        is.table(tbl)
-        is.table(keys)
+        local result = is.table(keys)
+        if result ~= true then return result end
 
         for _, key in keys do
-            checks.key(tbl, key)
+            return checks.key(tbl, key)
         end
 
         return true
     end,
 
     value = function(tbl, value)
-        is.table(tbl)
-        isNot.none(value)
+        local result = is.table(tbl)
+        if result ~= true then return result end
+
+        local result = isNot.none(value)
+        if result ~= true then return result end
 
         for _, v in tbl do
             if v == value then
-                error(string.format("[ERROR]: expected table to not kave '%s' value", tostring(value)), 3)
+                local msg = "expected table to not kave '%s' value"
+                return string.format(msg, tostring(value))
             end
         end
 
@@ -96,11 +107,11 @@ checks = {
     end,
 
     values = function(tbl, values)
-        is.table(tbl)
-        is.table(values)
+        local result = is.table(values)
+        if result ~= true then return result end
 
         for _, value in values do
-            checks.value(tbl, value)
+            return checks.value(tbl, value)
         end
 
         return true

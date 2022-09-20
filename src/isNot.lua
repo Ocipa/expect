@@ -8,7 +8,7 @@ local checks: types.is
 checks = {
     server = function(_, _)
         if runService:IsServer() then
-            error("[ERROR]: expected to not be server, is server", 3)
+            return "expected to not be server, is server"
         end
 
         return true
@@ -16,7 +16,7 @@ checks = {
 
     client = function(_, _)
         if runService:IsClient() then
-            error("[ERROR]: expected to not be client, is client", 3)
+            return "expected to not be client, is client"
         end
 
         return true
@@ -24,7 +24,7 @@ checks = {
 
     studio = function(_, _)
         if runService:IsStudio() then
-            error("[ERROR]: expected to not be in studio", 3)
+            return "expected to not be in studio"
         end
 
         return true
@@ -38,7 +38,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType == "nil" then
-            error("[ERROR]: expected not nil, got nil", 3)
+            return "expected not nil, got nil"
         end
 
         return true
@@ -48,7 +48,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType == "string" then
-            error("[ERROR]: expected not string, got string", 3)
+            return "expected not string, got string"
         end
 
         return true
@@ -58,7 +58,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType == "number" then
-            error("[ERROR]: expected not number, got number", 3)
+            return "expected not number, got number"
         end
 
         return true
@@ -68,7 +68,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType == "boolean" then
-            error("[ERROR]: expected not boolean, got boolean", 3)
+            return "expected not boolean, got boolean"
         end
 
         return true
@@ -78,7 +78,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType == "table" then
-            error("[ERROR]: expected not table, got table", 3)
+            return "expected not table, got table"
         end
 
         return true
@@ -88,7 +88,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType == "function" then
-            error("[ERROR]: expected not function, got function", 3)
+            return "expected not function, got function"
         end
 
         return true
@@ -98,7 +98,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType == "thread" then
-            error("[ERROR]: expected not thread, got thread", 3)
+            return "expected not thread, got thread"
         end
 
         return true
@@ -112,7 +112,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType == "Instance" then
-            error("[ERROR]: expected not instance, got instance", 3)
+            return "expected not instance, got instance"
         end
 
         return true
@@ -122,7 +122,7 @@ checks = {
         is.instance(v1)
 
         if v1:IsA(v2) then
-            error(string.format("[ERROR]: expected not %s, got %s", v2, v2), 3)
+            return string.format("expected not %s, got %s", v2, v2)
         end
 
         return true
@@ -134,7 +134,8 @@ checks = {
 
     equal = function(v1, v2)
         if v1 == v2 then
-            error(string.format("[ERROR]: expected %s to not equal %s", tostring(v1), tostring(v2)), 3)
+            local msg = "expected %s to not equal %s"
+            return string.format(msg, tostring(v1), tostring(v2))
         end
 
         return true

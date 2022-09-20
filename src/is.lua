@@ -7,7 +7,7 @@ local checks: types.is
 checks = {
     server = function(_, _)
         if not runService:IsServer() then
-            error("[ERROR]: expected to be server, is client", 3)
+            return "expected to be server, is client"
         end
 
         return true
@@ -15,7 +15,7 @@ checks = {
 
     client = function(_, _)
         if not runService:IsClient() then
-            error("[ERROR]: expected to be client, is server", 3)
+            return "expected to be client, is server"
         end
 
         return true
@@ -23,7 +23,7 @@ checks = {
 
     studio = function(_, _)
         if not runService:IsStudio() then
-            error("[ERROR]: expected to be in studio", 3)
+            return "expected to be in studio"
         end
 
         return true
@@ -37,7 +37,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType ~= "nil" then
-            error(string.format("[ERROR]: expected nil, got %s", ofType), 3)
+            return string.format("expected nil, got %s", ofType)
         end
 
         return true
@@ -47,7 +47,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType ~= "string" then
-            error(string.format("[ERROR]: expected string, got %s", ofType), 3)
+            return string.format("expected string, got %s", ofType)
         end
 
         return true
@@ -57,7 +57,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType ~= "number" then
-            error(string.format("[ERROR]: expected number, got %s", ofType), 3)
+            return string.format("expected number, got %s", ofType)
         end
 
         return true
@@ -67,7 +67,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType ~= "boolean" then
-            error(string.format("[ERROR]: expected boolean, got %s", ofType), 3)
+            return string.format("expected boolean, got %s", ofType)
         end
 
         return true
@@ -77,7 +77,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType ~= "table" then
-            error(string.format("[ERROR]: expected table, got %s", ofType), 3)
+            return string.format("expected table, got %s", ofType)
         end
 
         return true
@@ -87,7 +87,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType ~= "function" then
-            error(string.format("[ERROR]: expected function, got %s", ofType), 3)
+            return string.format("expected function, got %s", ofType)
         end
 
         return true
@@ -97,7 +97,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType ~= "thread" then
-            error(string.format("[ERROR]: expected thread, got %s", ofType), 3)
+            return string.format("expected thread, got %s", ofType)
         end
 
         return true
@@ -111,7 +111,7 @@ checks = {
         local ofType = typeof(v1)
 
         if ofType ~= "Instance" then
-            error(string.format("[ERROR]: expected instance, got %s", ofType), 3)
+            return string.format("expected instance, got %s", ofType)
         end
 
         return true
@@ -121,7 +121,8 @@ checks = {
         checks.instance(v1)
 
         if not v1:IsA(v2) then
-            error(string.format("[ERROR]: expected %s to be of class %s, got %s", v1.Name, v2, v1.ClassName), 3)
+            local msg = "expected %s to be of class %s, got %s"
+            return string.format(msg, v1.Name, v2, v1.ClassName)
         end
 
         return true
@@ -133,7 +134,8 @@ checks = {
 
     equal = function(v1, v2)
         if v1 ~= v2 then
-            error(string.format("[ERROR]: expected %s to equal %s", tostring(v1), tostring(v2)), 3)
+            local msg = "expected %s to equal %s"
+            return string.format(msg, tostring(v1), tostring(v2))
         end
 
         return true

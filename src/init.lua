@@ -20,7 +20,13 @@ for i, v in modifierKeys do
             local val1 = value1
             value1 = nil
 
-            v2(val1, value2)
+            local result = v2(val1, value2)
+
+            if result ~= true then
+                error("[ERROR]: "..result, 2)
+            end
+
+            return result
         end
     end
 
