@@ -139,6 +139,47 @@ checks = {
         end
 
         return true
+    end,
+
+
+
+
+
+    near = function(v1, v2, dis)
+        dis = if dis == nil then 0.001 else dis
+        checks.number(dis)
+
+        local v1Type = typeof(v1)
+        local v2Type = typeof(v2)
+
+        if v1Type ~= v2Type then
+            return string.format("expected both values to be of the same type, got %s and %s", v1Type, v2Type)
+        end
+
+        local distance: number
+
+        if v1Type == "number" then
+            distance = math.abs(v2 - v1)
+
+        elseif v1Type == "Vector2" then
+            distance = math.sqrt(math.pow(v1.X - v2.X, 2) + math.pow(v1.Y - v2.Y, 2))
+
+        elseif v1Type == "Vector3" then
+            distance = (v2 - v1).Magnitude
+
+        elseif v1Type == "CFrame" then
+            distance = (v2.Position - v1.Position).Magnitude
+        end
+
+        if not distance then
+            return string.format("expected to be of type number, Vector2, Vector3 or CFrame, got %s", v1Type)
+        end
+
+        if distance > dis then
+            return string.format("expected to be within %s studs", dis)
+        end
+
+        return true
     end
 }
 

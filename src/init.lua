@@ -16,11 +16,11 @@ for i, v in modifierKeys do
     local assertKeys = {}
 
     for i2, v2 in v do
-        assertKeys[i2] = function(value2)
+        assertKeys[i2] = function(...)
             local val1 = value1
             value1 = nil
 
-            local result = v2(val1, value2)
+            local result = v2(val1, ...)
 
             if result ~= true then
                 error("[ERROR]: "..result, 2)

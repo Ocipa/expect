@@ -8,6 +8,8 @@ local tables = _G.tables
 local functions = _G.functions
 local threads = _G.threads
 
+local nearValues = _G.nearValues
+local notNearValues = _G.notNearValues
 
 return function()
     local module = require(script.Parent)
@@ -172,6 +174,26 @@ return function()
 
         it("passed none", function()
             expect(module().isNot.thread).never.to.throw()
+        end)
+    end)
+
+    -- TODO: is equal
+
+    describe("near", function()
+        it("near values", function()
+            for _, v in nearValues do
+                expect(function()
+                    module(v[1]).isNot.near(v[2], v[3])
+                end).to.throw()
+            end
+        end)
+
+        it("not near values", function()
+            for _, v in notNearValues do
+                expect(function()
+                    module(v[1]).isNot.near(v[2], v[3])
+                end).never.to.throw()
+            end
         end)
     end)
 end

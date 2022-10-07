@@ -109,4 +109,26 @@ _G.invalidValues = {
     "c", 99, false
 }
 
+_G.nearValues = {
+    {0, 5, 7},
+    {-5, 5, 10},
+    {Vector2.new(0, 0), Vector2.new(1, 1), 2},
+    {Vector2.new(-5, 5), Vector2.new(3, 8), 25},
+    {Vector3.new(0, 0, 0), Vector3.new(1, 1, 1), 2},
+    {Vector3.new(-5, 5, 3), Vector3.new(3, 8, 7), 25},
+    {CFrame.new(Vector3.new(0, 0, 0)), CFrame.new(Vector3.new(1, 1, 1)), 2},
+    {CFrame.new(Vector3.new(-5, 5, 3)), CFrame.new(Vector3.new(3, 8, 7)), 25},
+}
+
+_G.notNearValues = {
+    {0, 5, 3},
+    {-5, 5, 5},
+    {Vector2.new(0, 0), Vector2.new(1, 1), 1},
+    {Vector2.new(-5, 5), Vector2.new(3, 8), 2},
+    {Vector3.new(0, 0, 0), Vector3.new(1, 1, 1), .5},
+    {Vector3.new(-5, 5, 3), Vector3.new(3, 8, 7), 3},
+    {CFrame.new(Vector3.new(0, 0, 0)), CFrame.new(Vector3.new(1, 1, 1)), .5},
+    {CFrame.new(Vector3.new(-5, 5, 3)), CFrame.new(Vector3.new(3, 8, 7)), 3},
+}
+
 return nil

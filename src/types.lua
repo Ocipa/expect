@@ -26,6 +26,8 @@ export type is = {
     class: (classname: string) -> boolean,
 
     equal: (value: any) -> boolean,
+
+    near: (value: any, dis: number) -> boolean,
 }
 
 export type has = {
