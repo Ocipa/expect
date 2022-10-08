@@ -8,6 +8,9 @@ local tables = _G.tables
 local functions = _G.functions
 local threads = _G.threads
 
+local nan = _G.nan
+local inf = _G.inf
+
 local nearValues = _G.nearValues
 local notNearValues = _G.notNearValues
 
@@ -178,6 +181,46 @@ return function()
     end)
 
     -- TODO: is equal
+
+    describe("nan", function()
+        it("valid nan", function()
+            for _, v in nan do
+                expect(module(v).is.nan).never.to.throw()
+            end
+        end)
+
+        it("invalid nan", function()
+            for _, v in {strings, numbers, booleans, tables, functions, inf} do
+                for _, v2 in v do
+                    expect(module(v2).is.nan).to.throw()
+                end
+            end
+        end)
+
+        it("passed none", function()
+            expect(module().is.nan).to.throw()
+        end)
+    end)
+
+    describe("inf", function()
+        it("valid inf", function()
+            for _, v in inf do
+                expect(module(v).is.inf).never.to.throw()
+            end
+        end)
+
+        it("invalid inf", function()
+            for _, v in {strings, numbers, booleans, tables, functions, nan} do
+                for _, v2 in v do
+                    expect(module(v2).is.inf).to.throw()
+                end
+            end
+        end)
+
+        it("passed none", function()
+            expect(module().is.inf).to.throw()
+        end)
+    end)
 
     describe("near", function()
         it("near values", function()

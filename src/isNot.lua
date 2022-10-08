@@ -145,6 +145,30 @@ end
 
 
 
+checks.nan = function(v1, _)
+    local isNumber = is.number(v1)
+
+    if isNumber == true and v1 ~= v1 then
+        return "expected not nan, got nan"
+    end
+
+    return true
+end
+
+checks.inf = function(v1, _)
+    local isNumber = is.number(v1)
+
+    if isNumber == true and tostring(math.abs(v1)) == "inf" then
+        return "expected not inf, got inf"
+    end
+
+    return true
+end
+
+
+
+
+
 local nearChecks: {[string]: <T>(v1: T, v2: T) -> number | string} = {
     number = function(v1, v2)
         return math.abs(v2 - v1)

@@ -27,6 +27,9 @@ export type is = {
 
     equal: (value: any) -> boolean,
 
+    nan: () -> boolean,
+    inf: () -> boolean,
+
     near: (value: any, dis: number) -> boolean,
 }
 

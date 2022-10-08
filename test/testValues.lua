@@ -26,8 +26,6 @@ _G.numbers = {
     -8,
     0.333,
     5.0001,
-    math.huge,
-    -math.huge,
     math.pi,
     tonumber("250"),
 }
@@ -131,6 +129,15 @@ _G.notNearValues = {
     {CFrame.new(Vector3.new(0, 0, 0)), CFrame.new(Vector3.new(1, 1, 1)), .5},
     {CFrame.new(Vector3.new(-5, 5, 3)), CFrame.new(Vector3.new(3, 8, 7)), 3},
     {Instance.new("Part"), Instance.new("Part"), -1},
+}
+
+_G.nan = {
+    0/0
+}
+
+_G.inf = {
+    1/0,
+    math.huge
 }
 
 return nil
