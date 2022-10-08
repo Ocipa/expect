@@ -5,8 +5,6 @@
     <img src="./assets/logo.png">
 </p>
 
-> This is an opinionated assert library.
-
 
 ## Example
 ```lua

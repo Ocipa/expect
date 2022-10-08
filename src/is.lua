@@ -161,6 +161,26 @@ local nearChecks: {[string]: <T>(v1: T, v2: T) -> number | string} = {
     CFrame = function(v1, v2)
         return (v2.Position - v1.Position).Magnitude
     end,
+
+    Instance = function(v1, v2)
+        local success, result = pcall(function()
+            local p1, p2 = v1.Position, v2.Position
+            local posType = typeof(p1)
+
+            if posType ~= "Vector3" then
+                return string.format("expected Instance to have a Vector3 Position, got %s", posType)
+            end
+
+            return (p2 - p1).Magnitude
+        end)
+
+        if success then
+            return result
+
+        else
+            return string.format("expected a Instance with a position property, got %s", v1.ClassName)
+        end
+    end,
 }
 
 checks.near = function(v1, v2, dis)

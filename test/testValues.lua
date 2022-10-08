@@ -3,7 +3,7 @@
 --[[
 
 YES, I AM USING _G, THESE ARE JUST TEST VALUES FOR TESTING, THIS
-CODE WILL NEVER EVEN SEE A GAME CODE BASE. FIGHT ME ABOUT IT!
+CODE WILL NEVER RUN IN A GAME. FIGHT ME!
 
 - Ocipa 9/17/2022
 
@@ -118,6 +118,7 @@ _G.nearValues = {
     {Vector3.new(-5, 5, 3), Vector3.new(3, 8, 7), 25},
     {CFrame.new(Vector3.new(0, 0, 0)), CFrame.new(Vector3.new(1, 1, 1)), 2},
     {CFrame.new(Vector3.new(-5, 5, 3)), CFrame.new(Vector3.new(3, 8, 7)), 25},
+    {Instance.new("Part"), Instance.new("Part"), 0},
 }
 
 _G.notNearValues = {
@@ -129,6 +130,7 @@ _G.notNearValues = {
     {Vector3.new(-5, 5, 3), Vector3.new(3, 8, 7), 3},
     {CFrame.new(Vector3.new(0, 0, 0)), CFrame.new(Vector3.new(1, 1, 1)), .5},
     {CFrame.new(Vector3.new(-5, 5, 3)), CFrame.new(Vector3.new(3, 8, 7)), 3},
+    {Instance.new("Part"), Instance.new("Part"), -1},
 }
 
 return nil
