@@ -145,6 +145,24 @@ end
 
 
 
+local nearChecks: {[string]: <T>(v1: T, v2: T) -> number | string} = {
+    number = function(v1, v2)
+        return math.abs(v2 - v1)
+    end,
+
+    Vector2 = function(v1, v2)
+        return math.sqrt(math.pow(v1.X - v2.X, 2) + math.pow(v1.Y - v2.Y, 2))
+    end,
+
+    Vector3 = function(v1, v2)
+        return (v2 - v1).Magnitude
+    end,
+
+    CFrame = function(v1, v2)
+        return (v2.Position - v1.Position).Magnitude
+    end,
+}
+
 checks.near = function(v1, v2, dis)
     dis = if dis == nil then 0.001 else dis
     checks.number(dis)
@@ -156,23 +174,21 @@ checks.near = function(v1, v2, dis)
         return string.format("expected both values to be of the same type, got %s and %s", v1Type, v2Type)
     end
 
-    local distance: number
+    if nearChecks[v1Type] == nil then
+        local availableTypes = ""
 
-    if v1Type == "number" then
-        distance = math.abs(v2 - v1)
+        for i, _ in nearChecks do
+            availableTypes = availableTypes .. string.format("%s, ", i)
+        end
 
-    elseif v1Type == "Vector2" then
-        distance = math.sqrt(math.pow(v1.X - v2.X, 2) + math.pow(v1.Y - v2.Y, 2))
-
-    elseif v1Type == "Vector3" then
-        distance = (v2 - v1).Magnitude
-
-    elseif v1Type == "CFrame" then
-        distance = (v2.Position - v1.Position).Magnitude
+        return string.format("expected to be of type %sgot %s", availableTypes, v1Type)
     end
 
-    if not distance then
-        return string.format("expected to be of type number, Vector2, Vector3 or CFrame, got %s", v1Type)
+    local distance = nearChecks[v1Type](v1, v2)
+
+    if typeof(distance) == "string" then
+        -- near check can return an error string
+        return distance
     end
 
     if distance > dis then
