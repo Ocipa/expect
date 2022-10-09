@@ -114,6 +114,30 @@ end
 
 
 
+checks.truthy = function(v1, _)
+    if not v1 then
+        return string.format("expected %s to be truthy, but it is falsy", tostring(v1))
+    end
+
+    return true
+end
+
+
+
+
+
+checks.falsy = function(v1, _)
+    if v1 then
+        return string.format("expected %s to be falsy, but it is truthy", tostring(v1))
+    end
+
+    return true
+end
+
+
+
+
+
 checks.nan = function(v1, _)
     local isNumber = checks.number(v1)
     if isNumber ~= true then return isNumber end

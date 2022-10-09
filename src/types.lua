@@ -14,6 +14,8 @@ export type is = {
     server: () -> boolean,
     client: () -> boolean,
 
+    type: (type: string) -> boolean,
+
     none: () -> boolean,
     string: () -> boolean,
     number: () -> boolean,
@@ -26,6 +28,9 @@ export type is = {
     class: (classname: string) -> boolean,
 
     equal: (value: any) -> boolean,
+
+    truthy: () -> boolean,
+    falsy: () -> boolean,
 
     nan: () -> boolean,
     inf: () -> boolean,
