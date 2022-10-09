@@ -190,7 +190,7 @@ return function()
         end)
 
         it("invalid nan", function()
-            for _, v in {strings, numbers, booleans, tables, functions, inf} do
+            for _, v in {strings, numbers, booleans, tables, functions, threads, inf} do
                 for _, v2 in v do
                     expect(module(v2).is.nan).to.throw()
                 end
@@ -210,7 +210,7 @@ return function()
         end)
 
         it("invalid inf", function()
-            for _, v in {strings, numbers, booleans, tables, functions, nan} do
+            for _, v in {strings, numbers, booleans, tables, functions, threads, nan} do
                 for _, v2 in v do
                     expect(module(v2).is.inf).to.throw()
                 end

@@ -33,74 +33,49 @@ end
 
 
 
-checks.none = function(v1, _)
+checks.type = function(v1, v2)
+    local v2Type = typeof(v2)
+    if v2Type ~= "string" then return string.format("expected string, got %s", v2Type) end
+
     local ofType = typeof(v1)
 
-    if ofType ~= "nil" then
-        return string.format("expected nil, got %s", ofType)
+    if typeof(v1) ~= v2 then
+        return string.format("expected %s, got %s", v2, ofType)
     end
 
     return true
+end
+
+
+
+
+
+checks.none = function(v1, _)
+    return checks.type(v1, "nil")
 end
 
 checks.string = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType ~= "string" then
-        return string.format("expected string, got %s", ofType)
-    end
-
-    return true
+    return checks.type(v1, "string")
 end
 
 checks.number = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType ~= "number" then
-        return string.format("expected number, got %s", ofType)
-    end
-
-    return true
+    return checks.type(v1, "number")
 end
 
 checks.boolean = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType ~= "boolean" then
-        return string.format("expected boolean, got %s", ofType)
-    end
-
-    return true
+    return checks.type(v1, "boolean")
 end
 
 checks.table = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType ~= "table" then
-        return string.format("expected table, got %s", ofType)
-    end
-
-    return true
+    return checks.type(v1, "table")
 end
 
 checks.func = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType ~= "function" then
-        return string.format("expected function, got %s", ofType)
-    end
-
-    return true
+    return checks.type(v1, "function")
 end
 
 checks.thread = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType ~= "thread" then
-        return string.format("expected thread, got %s", ofType)
-    end
-
-    return true
+    return checks.type(v1, "thread")
 end
 
 
@@ -108,13 +83,7 @@ end
 
 
 checks.instance = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType ~= "Instance" then
-        return string.format("expected instance, got %s", ofType)
-    end
-
-    return true
+    return checks.type(v1, "Instance")
 end
 
 checks.class = function(v1, v2)

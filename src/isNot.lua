@@ -34,74 +34,47 @@ end
 
 
 
-checks.none = function(v1, _)
-    local ofType = typeof(v1)
+checks.type = function(v1, v2)
+    local isString = is.string(v2)
+    if isString ~= true then return isString end
 
-    if ofType == "nil" then
-        return "expected not nil, got nil"
+    if typeof(v1) == v2 then
+        return string.format("expected not %s, got %s", v2, v2)
     end
 
     return true
+end
+
+
+
+
+
+checks.none = function(v1, _)
+    return checks.type(v1, "nil")
 end
 
 checks.string = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType == "string" then
-        return "expected not string, got string"
-    end
-
-    return true
+    return checks.type(v1, "string")
 end
 
 checks.number = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType == "number" then
-        return "expected not number, got number"
-    end
-
-    return true
+    return checks.type(v1, "number")
 end
 
 checks.boolean = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType == "boolean" then
-        return "expected not boolean, got boolean"
-    end
-
-    return true
+    return checks.type(v1, "boolean")
 end
 
 checks.table = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType == "table" then
-        return "expected not table, got table"
-    end
-
-    return true
+    return checks.type(v1, "table")
 end
 
 checks.func = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType == "function" then
-        return "expected not function, got function"
-    end
-
-    return true
+    return checks.type(v1, "function")
 end
 
 checks.thread = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType == "thread" then
-        return "expected not thread, got thread"
-    end
-
-    return true
+    return checks.type(v1, "thread")
 end
 
 
@@ -109,13 +82,7 @@ end
 
 
 checks.instance = function(v1, _)
-    local ofType = typeof(v1)
-
-    if ofType == "Instance" then
-        return "expected not instance, got instance"
-    end
-
-    return true
+    return checks.type(v1, "Instance")
 end
 
 checks.class = function(v1, v2)
